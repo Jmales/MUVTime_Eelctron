@@ -1,0 +1,74 @@
+﻿<!---2 Panels-->
+
+<div ng-if="lay.videoPathFile === null && lay._3dpanel === false" ui-layout options="{flow: 'row'}">
+    <div ui-layout-container id="visPanel" size="70%" min-size="20%">
+        <graph-visualizer></graph-visualizer>
+    </div>
+    <div ui-layout-container id="timePanel" size="30%" min-size="5%">
+        <times-visualizer></times-visualizer>
+    </div>
+</div>
+<!---3 panels with video-->
+<div ng-if="lay.videoPathFile && lay._3dpanel===false" ui-layout options="{flow : 'row'}">
+    <div ui-layout-container size="70%" min-size="20%">
+        <div ui-layout options="{flow : 'column'}">
+            <div ui-layout-container id="visPanel" size="80%" min-size="20%">
+                <graph-visualizer></graph-visualizer>
+            </div>
+            <div ui-layout-container id="videoPanel" size="20%" min-size="5%" class="videoPanel">
+                <video-visualizer video-path-file="lay.videoPathFile"></video-visualizer>
+            </div>
+        </div>
+    </div>
+    <div ui-layout-container id="timePanel" size="30%" min-size="5%">
+        <times-visualizer></times-visualizer>
+    </div>
+</div>
+
+<!---3 panels with 3d visualization-->
+<div ng-if="lay.videoPathFile===null && lay._3dpanel===true" ui-layout options="{flow : 'row'}">
+    <div ui-layout-container id="visPanel" size="70%" min-size="20%">
+        <graph-visualizer></graph-visualizer>
+
+    </div>
+    <div ui-layout-container size="30%" min-size="5%">
+        <div ui-layout options="{flow : 'column'}">
+            <div ui-layout-container id="timePanel" size="80%" min-size="20%">
+                <times-visualizer></times-visualizer>
+            </div>
+            <div ui-layout-container id="3dPanel" size="20%" min-size="5%">
+                <xyz-visualizer></xyz-visualizer>
+            </div>
+        </div>
+    </div>
+</div>
+<!---4 panels-->
+<div ng-if="lay.videoPathFile && lay._3dpanel===true" ui-layout options="{flow : 'column'}">
+
+    <div ui-layout-container size="80%" min-size="20%">
+        <div ui-layout options="{flow: 'row'}">
+            <div ui-layout-container id="visPanel" min-size="20%" size="70%">
+                <graph-visualizer></graph-visualizer>
+            </div>
+            <div ui-layout-container id="timePanel" size="30%" min-size="5%">
+                <times-visualizer></times-visualizer>
+            </div>
+        </div>
+
+    </div>
+    <div ui-layout-container size="20%" min-size="5%">
+        <div ui-layout options="{flow: 'row'}">
+            <div ui-layout-container id="videoPanel" size="70%" min-size="20%" class="videoPanel">
+                <video-visualizer video-path-file="lay.videoPathFile"></video-visualizer>
+            </div>
+            <div ui-layout-container id="3dPanel" size="30%" min-size="10%">
+                <!---3D Panel-->
+                <xyz-visualizer></xyz-visualizer>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

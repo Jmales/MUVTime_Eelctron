@@ -1,0 +1,65 @@
+﻿<div class="flex-container_title">
+    <div class="flex-item panelTitle">Video</div>
+    <div class="flex-item glyphicon glyphicon-remove"></div>
+</div>
+                
+<div class="videoPlayer">
+    
+        <video id="video1" autoplay controls on-load="vid.startVideo()" ng-src="{{vid.videoPathFile}}" type="video/x-matroska">
+
+        </video>
+</div>
+
+<div class="flex-container_videoControl">
+    <div class="flex-item">
+        <button type="button" id="buttonBackward" class="btn btn-default" ng-click="vid.backwardVideo()">
+            <span class="glyphicon glyphicon-backward"></span>
+        </button>
+    </div>
+    <div class="flex-item">
+        <button type="button" id="buttonPause" class="btn btn-default" ng-click="vid.pauseVideo()">
+            <span class="glyphicon glyphicon-pause"></span>
+        </button>
+    </div>
+    <div class="flex-item">
+        <button type="button" id="buttonPlay" class="btn btn-default" ng-click="vid.playVideo()">
+            <span class="glyphicon glyphicon-play"></span>
+        </button>
+    </div>
+    <div class="flex-item"> 
+        <button type="button" id="buttonStop" class="btn btn-default" ng-click="vid.stopVideo()">
+            <span class="glyphicon glyphicon-stop"></span>
+        </button>
+    </div>
+    <div class="flex-item">
+        <button type="button" id="buttonForward" class="btn btn-default" ng-click="vid.forwardVideo()">
+            <span class="glyphicon glyphicon-forward"></span>
+        </button>
+    </div>
+    <div class="line-break"></div>
+    <div class="flex-item">
+        <button type="button" id="buttonStepBackward" class="btn btn-default" ng-click="vid.stepBackwardVideo()">
+            <span class="glyphicon glyphicon-step-backward"></span>
+        </button>
+    </div>
+    <form class="flex-item">
+        <input type="number" step="any" class="form-control stepBox" min="{{vid.min}}" max="{{vid.max}}" size="2" ng-model="vid.stepValue" required />
+    </form>
+    <div class="flex-item">
+        <select class="selectpicker selectUnits" ng-model="vid.selection" ng-change="vid.update_select()" data-width="fit" >
+            <option id="optionMs">ms</option>
+            <option id="optionS">s</option>
+            <option disabled>────</option>
+            <option id="optionFrame">frame</option>
+        </select>
+    </div>
+
+
+    <div class="flex-item">
+        <button type="button" id="buttonStepForward" class="btn btn-default" ng-click="vid.stepForwardVideo()">
+            <span class="glyphicon glyphicon-step-forward"></span>
+        </button>
+    </div>
+    </div>
+                
+            

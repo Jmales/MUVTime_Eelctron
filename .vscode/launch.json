@@ -1,0 +1,35 @@
+{
+
+    "version": "0.1.0",
+
+    "configurations": [
+
+        { 
+
+            "name": "Launch Electron App",
+
+            "type": "node",
+
+            "program": "${workspaceRoot}\\src\\electronSide\\main.js", // important
+
+            "stopOnEntry": false,
+
+            "args": [],
+
+            "cwd": "${workspaceRoot}/",
+
+            // next line is very important
+
+            "runtimeExecutable": "C:/Users/Malés/node_modules/electron-prebuilt/dist/electron.exe",
+
+            "runtimeArguments": [],
+
+            "env": { }, 
+
+            "sourceMaps": false
+
+        } 
+
+    ]
+
+}
