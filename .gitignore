@@ -1,3 +1,4 @@
 node_modules/
 src/resources/videos/
 src/resources/csv/
+dist/
