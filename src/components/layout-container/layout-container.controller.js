@@ -17,5 +17,27 @@ export default class layoutCtrl {
        
         /*Connect with the main window to have the path of the selected Video file*/
         ipcRenderer.on('videoFilePath', callbackVideoFile);
-    }
+        
+        var basePath="../node_modules/golden-layout/src/css/goldenlayout-";
+        var lightTheme = "light-theme.css";
+        var darkTheme = "dark-theme.css";
+        
+        this.stylePath = basePath + darkTheme;
+        
+
+        //Listen for event from main window when user selected a video file
+        var callbackCSSStyle = (function (event, arg) {
+            if(arg){ //Equals 1 === Dark
+                this.stylePath = basePath + darkTheme;
+            }
+            else{
+                this.stylePath = basePath + lightTheme;
+            }
+            $scope.$apply();
+        }).bind(this);
+
+        ipcRenderer.on('theme',callbackCSSStyle);
+        
+
+  }
 }

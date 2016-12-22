@@ -15,6 +15,14 @@ const helpers = require('./helpers.js');
 // be closed automatically when the JavaScript object is garbage collected.
 let win
 
+var themeEnum = {
+    Light:0,
+    Dark :1
+};
+
+//Global variable to share the css Theme
+var themeGlobal = themeEnum.Dark;
+
 function createWindow() {
     const screenshotCmd = 'Ctrl+Shift+A';
     var videoFilePath;
@@ -157,6 +165,35 @@ function createWindow() {
                     }
                 }
 
+            ]
+        },
+        {
+            label: 'View',
+            submenu: [
+                {
+                    label: 'Theme',
+                    submenu: [
+                        {
+                            type: 'radio',
+                            label: 'Dark',
+                            clicked: true,
+                            click (){
+                                themeGlobal = themeEnum.Dark;
+                                win.webContents.send('theme', themeGlobal);
+                           
+                            }
+                        },
+                        {
+                            type:'radio',
+                            label: 'Light',
+                            click (){
+                                themeGlobal = themeEnum.Light;
+                                win.webContents.send('theme', themeGlobal);
+                            }
+                        },
+                        
+                    ]
+                }
             ]
         }
     ]

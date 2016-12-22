@@ -4,9 +4,7 @@
   "version": "1.0.0",
   "description": "Electron-app1",
   "main": "src/electronSide/main.js",
-  "author": {
-    "name": "joaopedro"
-  },
+  "author": "joaopedro",
   "scripts": {
     "start": "electron src/electronSide/main.js",
     "build": "electron-packager . MyApp ",
@@ -25,6 +23,8 @@
     "electron-packager": "8.3.0",
     "ffprobe": "^1.1.0",
     "ffprobe-static": "^2.0.0",
+    "golden-layout": "^1.5.6",
+    "jquery": "^3.1.1",
     "nvd3": "^1.8.5"
   },
   "devDependencies": {
@@ -33,5 +33,11 @@
     "babel-preset-es2015": "^6.18.0",
     "raw-loader": "^0.5.1",
     "webpack": "^1.14.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://joaomales@bitbucket.org/joaomales/muvtime_electron.git"
+  },
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/joaomales/muvtime_electron#readme"
 }

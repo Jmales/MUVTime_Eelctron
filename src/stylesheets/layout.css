@@ -77,3 +77,8 @@
 input:invalid{
 	border:solid 2px #F5192F;
 }
+
+/*So as Golden-layout has scrollbar*/
+body .lm_content{
+  overflow: scroll;
+}
