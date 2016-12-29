@@ -12,7 +12,7 @@
     "build_mac": "electron-packager . MyApp_mac --platform=darwin "
   },
   "dependencies": {
-    "angular": "^1.6.0",
+    "angular": "^1.6.1",
     "angular-nvd3": "^1.0.9",
     "angular-ui-layout": "1.4.2",
     "bootstrap": "^3.3.7",

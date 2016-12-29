@@ -2,15 +2,32 @@
  <!--Choose .css theme-->
 <link rel="stylesheet" type="text/css" ng-href="{{lay.stylePath}}"/>
     
-<template type="text/html" id="userlistTemplate">
+<script type="text/ng-template" id="userlistTemplate">
     <ul ng-controller="userlistController" class="userlist">
         <li ng-repeat="user in users" 
             ng-click="select( user )"
             ng-class="{selected:user.isSelected}">
         {{user.name}}
         </li>
+        
     </ul>
-</template>
+    lol
+    <graph-visualizer></graph-visualizer>
+</script>
+
+<script type="text/ng-template" id="testTemplate">
+    <div ng-controller="testController">
+    {{stylePath}}
+    {{what}}
+    <button ng-click="count = count +1"> Increment</button>
+    <span>{{count}}</span>
+
+        lol
+    <test-directive></test-directive>
+    <div>
+
+    <graph-visualizer></graph-visualizer>
+</script>
 
 <template type="text/html" id="userDetailTemplate">
         <div ng-controller="userdetailsController" class="userdetails">
@@ -18,6 +35,7 @@
         <h2>{{user.name}}</h2>
         <p>{{user.street}}</p>
         whaaaat
+        {{stylePath}}
         </div>
 </template>
 

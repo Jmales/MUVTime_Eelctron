@@ -1,5 +1,5 @@
 ﻿export default class videoCtrl {
-    constructor(LayoutService) { 
+    constructor($scope, LayoutService) { 
         this.stepValue = 100;
         this.selection = "ms";
         this.max = 10000;
@@ -8,7 +8,7 @@
         var video = document.getElementById("video1");
         var videoplayRate = 1.0;
 
-        console.log(this.videoPathFile);
+        console.log(LayoutService.videoPathFile);
         //this.videoPathFile = LayoutService.videoPathFile;
 
         /*Routine related with the initial values*/

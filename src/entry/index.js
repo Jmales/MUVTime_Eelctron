@@ -5,7 +5,7 @@
 import angular from 'angular';
 import 'app/services';
 import 'app/components';
-import '../components/layout-container/test.js'
 
+//angular.bootstrap(GoldenTestLayoutModule);
+export default angular.module('app', ['app.services', 'app.components']);
 
-export default angular.module('app', ['app.services', 'app.components','userdetails','userlist']);

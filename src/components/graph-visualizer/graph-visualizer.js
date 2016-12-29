@@ -14,6 +14,13 @@ const component = {
 };
 
 const Module = angular.module('app.components.graph-visualizer', [ 'nvd3'])
-                      .component('graphVisualizer', component);
+                      .directive('graphVisualizer', function(){
+                          return{
+                             restrict: 'E',
+                              templateUrl: 'components/graph-visualizer/graph-visualizer.html',
+                              controller: controller,
+                              controllerAs: 'grap' 
+                          }
+                      });
 
 export default Module;

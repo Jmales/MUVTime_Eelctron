@@ -7,7 +7,7 @@ var time = [];
 var graph_data = [];
 
 export default class graphCtrl {
-    constructor($scope,LayoutService) {
+    constructor($scope) {
         this.isDataReady = false;
         this.options = {
     chart: {
@@ -113,9 +113,9 @@ this.data = [{
         }).bind(this);
 
         //Listen for resize in ui-layout event
-        $scope.$on('ui.layout.resize', function (e, beforeContainer, afterContainer) {
-            LayoutService.resizeCanvas();
-        });
+        // $scope.$on('ui.layout.resize', function (e, beforeContainer, afterContainer) {
+        //     LayoutService.resizeCanvas();
+        // });
 
         this.labels = ["January", "February", "March", "April", "May", "June", "July"];
         this.series = ['Series A', 'Series B'];
