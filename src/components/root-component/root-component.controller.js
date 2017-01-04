@@ -1,53 +1,73 @@
-
 import $ from 'jquery';
 import GoldenLayout from 'golden-layout';
-
-class test2{
-    constructor(){
-        this.test = 0.001;
-        		
-		this.users = [
-			{ name: 'Jackson Turner', street: '217 Tawny End', img: 'men_1.jpg' },
-			{ name: 'Megan Perry', street: '77 Burning Ramp', img: 'women_1.jpg' },
-			{ name: 'Ryan Harris', street: '12 Hazy Apple Route', img: 'men_2.jpg' },
-			{ name: 'Jennifer Edwards', street: '33 Maple Drive', img: 'women_2.jpg' },
-			{ name: 'Noah Jenkins', street: '423 Indian Pond Cape', img: 'men_3.jpg' }
-		];
-    }
-}
-
-angular.module('userlist', [] )
-	.controller('userlistController', test2);
+const ipcRenderer = require('electron').ipcRenderer;
 
 export default class GLComponent { 
-    constructor($element,LayoutService,$http,$compile, $rootScope){
+    constructor($element,$http,$compile, $rootScope,$window,LayoutService){
+
+        this.videoPathFile = LayoutService.videoPathFile;
+        this._3dpanel = true;
+
+        //Listen for event from main window when user selected a video file
+        var callbackVideoFile = (function (event, arg1,arg2) {
+            LayoutService.setVideoPathFile(arg1);
+            LayoutService.isVideoOpened = true;
+            LayoutService.setFrameRate(arg2);
+            this.videoPathFile = arg1;
+            $rootScope.$apply();
+        }).bind(this);
+       
+        /*Connect with the main window to have the path of the selected Video file*/
+        ipcRenderer.on('videoFilePath', callbackVideoFile);
+        
+        var basePath="../node_modules/golden-layout/src/css/goldenlayout-";
+        var lightTheme = "light-theme.css";
+        var darkTheme = "dark-theme.css";
+        
+        this.stylePath = basePath + darkTheme;
+        
+
+        //Listen for event from main window when user selected a video file
+        var callbackCSSStyle = (function (event, arg) {
+            if(arg){ //Equals 1 === Dark
+                this.stylePath = basePath + darkTheme;
+            }
+            else{
+                this.stylePath = basePath + lightTheme;
+            }
+            $rootScope.$apply();
+        }).bind(this);
+
+        ipcRenderer.on('theme',callbackCSSStyle);
+
         console.log(LayoutService.videoPathFile);
-        this.test = 1000;
-        this.testvid="whhhhaaaatttsup";
+
+        /* Layout Related */
         this.layout = null;
+
         var template_Video= {
                         title: 'Video',
+                        id: 'vidPanel',
                         type: 'component',
-                        componentName: 'timeT',
+                        componentName: 'myComponent',
                         componentState: {
                             module: 'app.components.video-visualizer',
                             directive: 'video-visualizer',
-                            extraInputs: 'video-path-file="{{gl.testvid}}"'
+                            extraInputs: 'video-path-file="{{gl.videoPathFile}}"'
                             }
                         };
         var template_xyzVisualizer = {
                         title: '3D',
+                        id:'3dPanel',
                         type: 'component',
-                        componentName: 'timeT',
+                        componentName: 'myComponent',
                         componentState: {
-                            module: 'app.components.xy<-visualizer',
+                            module: 'app.components.xyz-visualizer',
                             directive: 'xyz-visualizer'
                             }
                         };
         this.config = {
-            settings:{
-                showPopoutIcon: false //To avoid PopUp option
-            },
+            
             content:[{
                 type: 'column',
                 content: [{
@@ -55,9 +75,11 @@ export default class GLComponent {
                     height: 70,
                     content:[{
                         width: 60,
+                        isClosable: false,
                         title: 'Visualizations',
+                        id: 'visPanel',
                         type: 'component',
-                        componentName: 'timeT',
+                        componentName: 'myComponent',
                         componentState: {
                             module: 'app.components.graph-visualizer',
                             directive: 'graph-visualizer'
@@ -68,9 +90,10 @@ export default class GLComponent {
                     type:'row',
                     content: [{
                         width: 70,
-                        type: 'component',
                         title: 'Time Series',
-                        componentName: 'timeT',
+                        id: 'timePanel',
+                        type: 'component',
+                        componentName: 'myComponent',
                         componentState: {
                             module: 'app.components.times-visualizer',
                             directive: 'times-visualizer'
@@ -83,24 +106,11 @@ export default class GLComponent {
                 ]
             }]
         };
-        var AngularModuleComponent = function( container, state ) {
-            var html = $( '#' + state.templateId ).html(),
-                element = container.getElement();
-            element.html(html);
 
-        angular
-            .module( state.module )
-
-            angular.bootstrap( element[ 0 ], [ state.module ] );
-        }
-
-        //TODO:Talvez consiga fazer bootstrap da app toda logo. Ver isso
-        //angular.bootstrap(document, ['myApp']);
         this.$postLink = function(){
             this.layout = new GoldenLayout(this.config);
         
-            // this.layout.registerComponent('timeT', AngularModuleComponent); 
-            this.layout.registerComponent('timeT', function( container, state ){
+            this.layout.registerComponent('myComponent', function( container, state ){
                 if(state.extraInputs != null){
                     var html = $compile('<'+ state.directive + ' ' 
                                 + state.extraInputs + '></'+state.directive + '>')($rootScope);
@@ -111,11 +121,30 @@ export default class GLComponent {
                                 +'></'+state.directive +'></div>')($rootScope);
                 }
                  
+                container.on('open',() => {
+                    console.log('Height:' + container.height);
+                    console.log('Width:' + container.width); 
+                    
+                }) 
+                
+                container.on('resize', () => {
+                    $(window).trigger( 'resize' );
+                })
+
                 container.getElement().html(html);
                 });
                 
 
             this.layout.init();
+
+             $(window).resize( () => {
+                    //console.log(this.layout.root.contentItems[0]);
+                    //console.log(this.layout.root.contentItems[0].getItemsById('timePanel')[0].container.height);
+
+                    LayoutService.resizeCanvas(this.layout.root.contentItems[0].getItemsByType('component'));
+                    
+
+             })
         }
 
         this.addMenuItem = function( title, text ) {
@@ -127,7 +156,7 @@ export default class GLComponent {
             var newItemConfig = {
                     title: title,
                     type: 'component',
-                    componentName: 'timeT',
+                    componentName: 'myComponent',
                     componentState: {
                             module: 'app.components.video-visualizer',
                             templateId: 'videoTemplate'
@@ -142,10 +171,7 @@ export default class GLComponent {
 
         this.addMenuItem( 'Add me!', 'You\'ve added me!' );
 
-        this.what = function(){
-            console.log("here");
-        }
-
+       
     }
     
    

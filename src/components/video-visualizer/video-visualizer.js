@@ -1,8 +1,7 @@
 ﻿import angular from 'angular';
-import template from './video-visualizer.html';
 import controller from './video-visualizer.controller.js';
 
-
+/*import template from './video-visualizer.html';
 const component = {
     template,
     controller,
@@ -10,18 +9,18 @@ const component = {
     bindings: {
         videoPathFile: '<'
     }
-};
+};*/
 
 const Module = angular.module('app.components.video-visualizer', [])
                       .directive('videoVisualizer',function(){
                           return{
                              restrict: 'E',
-                              templateUrl: 'components/video-visualizer/video-visualizer.html',
-                              controller: controller,
-                              controllerAs: 'vid',
-                              scope:{
+                             templateUrl: 'components/video-visualizer/video-visualizer.html',
+                             controller: controller,
+                             controllerAs: 'vid',
+                             scope:{
                                   videoPathFile: '@'
-                              },
+                            },
                           }
                       });
 

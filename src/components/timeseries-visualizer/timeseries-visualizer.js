@@ -1,14 +1,13 @@
 ﻿import angular from 'angular';
-import template   from './timeseries-visualizer.html';
 import controller from './timeseries-visualizer.controller.js';
 
-import LayoutService from 'app/services/layout.service';
 
+/*import template   from './timeseries-visualizer.html';
 const component = {
     template,
     controller,
     controllerAs: 'time'
-};
+};*/
 
 const Module = angular.module('app.components.times-visualizer',[])
                       .directive('timesVisualizer',function(){

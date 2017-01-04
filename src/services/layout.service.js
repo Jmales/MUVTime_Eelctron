@@ -4,12 +4,18 @@
 
 class LayoutService {
     constructor() {
-        this.videoPathFile = "what";
+        this.videoPathFile = null;
         this._3dpanel = false;
         this.frameRate = 0;
         this.isVideoOpened = false;
+        this.chartPanelHeight = null;
+        this.chartPanelWidth = null;
     }
 
+    setCharts(charts){
+        this.charts = charts;
+        console.log(this.charts);
+    }
     setVideoPathFile(pathFile) {
         this.videoPathFile = pathFile;
         this.isVideoOpened = true;
@@ -25,8 +31,36 @@ class LayoutService {
     }
 
     //Resize canvas and video to obey the parent panel height and width
-    resizeCanvas() {
-        var parentHeight = document.getElementById("visPanel").clientHeight;
+    resizeCanvas(containers) {
+        for(var i in containers){
+           var component=containers[i];
+           
+           switch(component.config.id){
+               case 'visPanel':
+                    var parentHeight = component.container.height;
+                    var parentWidth = component.container.width;
+
+                    this.chartPanelHeight = parentHeight;
+                    this.chartPanelWidth  = parentWidth;
+                    break;
+               case 'timePanel':
+                    break;
+               case 'vidPanel':
+                    var parentHeight = component.container.height;
+                    var parentWidth = component.container.width;
+
+                    var video = document.getElementById("video1");
+                    video.height = parentHeight - 90;
+                    video.width = parentWidth;
+                    break;
+                case '3dPanel':
+                    break;
+                default:
+                    console.log('No resize behaviour for this id');
+           }
+        }
+
+        /*var parentHeight = document.parent;
         var parentWidth = document.getElementById("visPanel").clientWidth;
 
         var canvases = document.getElementsByClassName("chart");
@@ -44,7 +78,7 @@ class LayoutService {
             var video = document.getElementById("video1");
             video.height = parentHeight - 90;
             video.width = parentWidth;
-        }
+        }*/
 }
 
 };

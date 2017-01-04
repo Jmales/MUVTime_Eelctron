@@ -11,7 +11,6 @@
 }
 
 .panelTitle {
-    
     text-align: left;
     font-size: 9px;
     color: #484242;
@@ -37,9 +36,7 @@
     font-size:9px;
 }
 
-.graphs {
-    margin: 5px 0px 0px 0px;
-}
+
 
 .videoPlayer {
     display: flex;
@@ -82,3 +79,9 @@ input:invalid{
 /*body .lm_content{
   overflow: scroll;
 }*/
+
+.graphs3{
+    height:100%;
+    width:100%;
+    position:absolute;
+}
