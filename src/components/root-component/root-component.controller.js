@@ -27,7 +27,7 @@ export default class GLComponent {
         this.stylePath = basePath + darkTheme;
         
 
-        //Listen for event from main window when user selected a video file
+        /*Listen for event from main window when user selected a video file*/
         var callbackCSSStyle = (function (event, arg) {
             if(arg){ //Equals 1 === Dark
                 this.stylePath = basePath + darkTheme;
@@ -39,8 +39,7 @@ export default class GLComponent {
         }).bind(this);
 
         ipcRenderer.on('theme',callbackCSSStyle);
-
-        console.log(LayoutService.videoPathFile);
+        /*---- */
 
         /* Layout Related */
         this.layout = null;
@@ -122,8 +121,7 @@ export default class GLComponent {
                 }
                  
                 container.on('open',() => {
-                    console.log('Height:' + container.height);
-                    console.log('Width:' + container.width); 
+                    //Here
                     
                 }) 
                 
@@ -151,7 +149,6 @@ export default class GLComponent {
             
             var element = $( '<li>' + text + '</li>' );
             $( '#menuContainer' ).append( element );
-            console.log(this);
 
             var newItemConfig = {
                     title: title,

@@ -5,9 +5,11 @@
     <div class="flex-item glyphicon glyphicon-remove"></div>
 </div>-->
 
-Color = <input type="color" ng-model="grap.options.chart.color[0]"/><br>
 
-<nvd3 id="graph1" options='grap.options' data='grap.data'></nvd3>
+<nvd3 id="graph1" options='grap.options[0]' data='grap.data'></nvd3>
+Width = <input type="color" ng-model="grap.data2[0].color" ng-init="grap.data2[0].color"/><br>
+<nvd3 id="graph2" options='grap.options[1]' data='grap.data2'></nvd3>
+<nvd3 id="graph3" options='grap.options[2]' data='grap.data3'></nvd3>
   <!-- <canvas id="line" class="chart chart-line" chart-data="grap.data"
   chart-labels="grap.labels" chart-series="grap.series" chart-options="grap.options"
   chart-dataset-override="grap.datasetOverride" chart-click="grap.onClick"></canvas>

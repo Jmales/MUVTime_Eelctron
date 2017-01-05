@@ -17,7 +17,6 @@
     "angular-ui-layout": "1.4.2",
     "bootstrap": "^3.3.7",
     "chart.js": "^2.4.0",
-    "csv": "^1.1.0",
     "d3": "^3.5.17",
     "electron": "1.4.6",
     "electron-packager": "8.3.0",
@@ -25,7 +24,8 @@
     "ffprobe-static": "^2.0.0",
     "golden-layout": "^1.5.6",
     "jquery": "^3.1.1",
-    "nvd3": "^1.8.5"
+    "nvd3": "^1.8.5",
+    "papaparse": "^4.1.2"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",

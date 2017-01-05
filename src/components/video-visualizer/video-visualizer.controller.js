@@ -8,15 +8,15 @@
         var video = document.getElementById("video1");
         var videoplayRate = 1.0;
 
-        console.log(LayoutService.videoPathFile);
         //this.videoPathFile = LayoutService.videoPathFile;
 
         /*Routine related with the initial values*/
         video.onloadstart = function () {
+            /*console.log("here_vid: ",LayoutService.vidPanelHeight,LayoutService.vidPanelWidth)
             var parentHeight = document.getElementById("videoPanel").clientHeight;
             var parentWidth = document.getElementById("videoPanel").clientWidth;
             video.height = parentHeight - 90;
-            video.width = parentWidth;
+            video.width = parentWidth;*/
            
         };
 

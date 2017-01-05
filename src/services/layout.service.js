@@ -8,8 +8,14 @@ class LayoutService {
         this._3dpanel = false;
         this.frameRate = 0;
         this.isVideoOpened = false;
-        this.chartPanelHeight = null;
-        this.chartPanelWidth = null;
+
+        this.visPanelHeight = null;
+        this.visPanelWidth = null;
+
+        this.vidPanelHeight = null;
+        this.vidPanelWidth  = null;
+
+
     }
 
     setCharts(charts){
@@ -40,18 +46,18 @@ class LayoutService {
                     var parentHeight = component.container.height;
                     var parentWidth = component.container.width;
 
-                    this.chartPanelHeight = parentHeight;
-                    this.chartPanelWidth  = parentWidth;
+                    this.visPanelHeight = parentHeight;
+                    this.visPanelWidth  = parentWidth;
                     break;
                case 'timePanel':
                     break;
                case 'vidPanel':
-                    var parentHeight = component.container.height;
-                    var parentWidth = component.container.width;
+                    this.vidPanelHeight = component.container.height;
+                    this.vidPanelWidth  = component.container.width;
 
                     var video = document.getElementById("video1");
-                    video.height = parentHeight - 90;
-                    video.width = parentWidth;
+                    video.height = this.vidPanelHeight - 90;
+                    video.width  = this.vidPanelWidth;
                     break;
                 case '3dPanel':
                     break;

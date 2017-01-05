@@ -1,7 +1,6 @@
 ﻿//const angular = require('angular');
 import angular from 'angular';
 import d3 from 'd3';
-import csv from 'csv';
 import controller from './graph-visualizer.controller.js';
 import 'angular-nvd3';
 
