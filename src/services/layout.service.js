@@ -1,4 +1,4 @@
-﻿import angular from 'angular';
+﻿import angular from "angular";
 
 
 
@@ -42,16 +42,16 @@ class LayoutService {
            var component=containers[i];
            
            switch(component.config.id){
-               case 'visPanel':
+               case 0: //visPanel
                     var parentHeight = component.container.height;
                     var parentWidth = component.container.width;
 
                     this.visPanelHeight = parentHeight;
                     this.visPanelWidth  = parentWidth;
                     break;
-               case 'timePanel':
+               case 1: //Time Series Panel
                     break;
-               case 'vidPanel':
+               case 2: //Video Panel 
                     this.vidPanelHeight = component.container.height;
                     this.vidPanelWidth  = component.container.width;
 
@@ -59,10 +59,10 @@ class LayoutService {
                     video.height = this.vidPanelHeight - 90;
                     video.width  = this.vidPanelWidth;
                     break;
-                case '3dPanel':
+                case 3: //XYZ (3D) Panel
                     break;
                 default:
-                    console.log('No resize behaviour for this id');
+                    console.log("No resize behaviour for this id");
            }
         }
 
@@ -87,7 +87,7 @@ class LayoutService {
         }*/
 }
 
-};
+}
 
-export default angular.module('app.services.layout-service', [])
-                      .service('LayoutService', LayoutService);
+export default angular.module("app.services.layout-service", [])
+                      .service("LayoutService", LayoutService);

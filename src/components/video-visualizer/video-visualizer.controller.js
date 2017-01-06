@@ -5,8 +5,10 @@
         this.max = 10000;
         this.min = 1;
 
+        
         var video = document.getElementById("video1");
         var videoplayRate = 1.0;
+
 
         //this.videoPathFile = LayoutService.videoPathFile;
 
@@ -51,7 +53,7 @@
                     ctrl.max = duration / 2;
                 }
             }
-        };
+        }
 
         /**
          * Functions to control video
@@ -66,22 +68,22 @@
         this.playVideo = function () {
             video.playbackRate = 1.0;
             video.play();
-        }
+        };
 
         this.pauseVideo = function () {
             video.pause();
-        }
+        };
 
         this.stopVideo = function () {
             video.pause();
             video.currentTime = 0;
-        }
+        };
 
         this.forwardVideo = function () {
             videoplayRate += 0.5;
             video.playbackRate = videoplayRate;
             
-        }
+        };
 
         this.backwardVideo = function () {
             videoplayRate -= 0.5;
@@ -89,7 +91,7 @@
             /*UNDONE: 
                 -queremos que o o botão vá até quanto?;
                 -backwards é ir para trás ou atrasar?*/
-        }
+        };
 
         this.stepBackwardVideo = function () {
             if (isValid(this.stepValue)) { //If the selected Step is valid
@@ -109,7 +111,7 @@
             else {
                 console.log("Problem with stepBackwardVideo");
             }
-        }
+        };
 
         this.stepForwardVideo = function () {
             if (isValid(this.stepValue)) { //If the selected Step is valid
@@ -128,7 +130,7 @@
             else {
                 console.log("Problem with stepForwardVideo");
             }
-        }
+        };
 
     }
 

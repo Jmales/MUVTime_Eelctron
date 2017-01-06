@@ -1,8 +1,8 @@
-﻿const ipcRenderer = require('electron').ipcRenderer;
-const fs = require('fs');
-import $ from 'jquery';
-import Papa from 'papaparse';
-
+﻿const ipcRenderer = require("electron").ipcRenderer;
+const fs = require("fs");
+import $ from "jquery";
+import Papa from "papaparse";
+import d3 from "d3";
 
 var time = [];
 var graph_data = [];
@@ -13,7 +13,7 @@ export default class graphCtrl {
         this.options= [];
         this.options[0] = {
             chart: {
-                type: 'stackedAreaChart',
+                type: "stackedAreaChart",
                 height: 450,
                 margin : {
                     top: 20,
@@ -30,12 +30,12 @@ export default class graphCtrl {
                 xAxis: {
                     showMaxMin: false,
                     tickFormat: function(d) {
-                        return d3.time.format('%x')(new Date(d))
+                        return d3.time.format("%x")(new Date(d));
                     }
                 },
                 yAxis: {
                     tickFormat: function(d){
-                        return d3.format(',.2f')(d);
+                        return d3.format(",.2f")(d);
                     }
                 },
                 zoom: {
@@ -45,7 +45,7 @@ export default class graphCtrl {
                     useNiceScale: false,
                     horizontalOff: false,
                     verticalOff: true,
-                    unzoomEventType: 'dblclick.zoom'
+                    unzoomEventType: "dblclick.zoom"
                 }
             }
             };
@@ -95,7 +95,7 @@ export default class graphCtrl {
 
             
             var self = this;
-            fs.readFile(arg, 'utf8', function (err, data) {
+            fs.readFile(arg, "utf8", function (err, data) {
                 if (err) {
                     return console.log(err);
                 }
@@ -112,11 +112,10 @@ export default class graphCtrl {
                 var self2 = self;
 
                 /*TODO: See why worker tread is not working */
-                var output = Papa.parse(data,{
+                Papa.parse(data,{
                     fastMode: true,
                     //worker: true,
                     complete:function(results){
-                        var res = results;
                         console.log("Parsing complete of file ");
                         for (var row in results.data) {
                             if (results.data[row][0] === "S1_vs_S2" && results.data[row][3] === "Big-Plastic-Blocks") {
@@ -169,27 +168,27 @@ export default class graphCtrl {
         }).bind(this);
 
         /*Connect with the main window to have the path of the selected Video file*/
-        ipcRenderer.on('dataFilePath', callbackDataFile);
+        ipcRenderer.on("dataFilePath", callbackDataFile);
 
         var addCSVData = (function () {
             console.log("adding");
             this.options[1] = {
             chart: {
-                type: 'lineChart',
+                type: "lineChart",
                 height: 450,
                 //x: function(d){return d[0];},
                 //y: function(d){return d[1];},
                 useInteractiveGuideline: true,
                 xAxis: {
-                    axisLabel: 'Time(s)',
+                    axisLabel: "Time(s)",
                     tickFormat: function(d){
-                        return d3.format(',.1f')(d);
+                        return d3.format(",.1f")(d);
                     }
                 },
                 yAxis: {
-                    axisLabel: 'Y Axis',
+                    axisLabel: "Y Axis",
                     tickFormat: function(d){
-                        return d3.format(',.2f')(d);
+                        return d3.format(",.2f")(d);
                     },
                 },
                 zoom: {
@@ -199,7 +198,7 @@ export default class graphCtrl {
                     useNiceScale: true,
                     horizontalOff: false,
                     verticalOff: true,
-                    unzoomEventType: 'dblclick.zoom'
+                    unzoomEventType: "dblclick.zoom"
                 }
             }
             };
@@ -208,13 +207,13 @@ export default class graphCtrl {
                     "key" : "TestCSV" ,
                     "values" : graph_data[0],
                     color:"#3366ff",
-            }]
+            }];
 
             this.options[2] = this.options[1];
             this.data3=[{
                     "values" : graph_data[4],
                     color:"#009933",
-            }]
+            }];
 
            
         }).bind(this);
@@ -223,19 +222,17 @@ export default class graphCtrl {
 
         $(window).resize( () => {
             for(var i in this.options){ //Find how many graphs there are and iterate over them
-                console.log(this.options.length)
                 this.options[i].chart.height =  (LayoutService.visPanelHeight*0.95)/(this.options.length);
                 this.options[i].chart.width  =  LayoutService.visPanelWidth;
 
                 if(this.options[i].chart.height === null || this.options[i].chart.width == null){
-                    console.log("No width or height for visualizations panel!")
+                    console.log("No width or height for visualizations panel!");
                     return;
                 }
             }
             $scope.$apply();
-            console.log("okok");
 
-        })
+        });
 
     }
 }

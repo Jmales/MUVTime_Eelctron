@@ -8,7 +8,6 @@ const url = require('url')
 
 //Imported javascript files
 //const countdown = require('./countdown')
-
 const helpers = require('./helpers.js');
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -20,13 +19,25 @@ var themeEnum = {
     Dark :1
 };
 
+
 //Global variable to share the css Theme
 var themeGlobal = themeEnum.Dark;
 
 function createWindow() {
     const screenshotCmd = 'Ctrl+Shift+A';
-    var videoFilePath;
 
+    var Helper       = new helpers()
+    var panelEnum    = Helper.panelEnum;
+    var openedPanels = Helper.openedPanels;
+
+    /* Create Renderer call's listener to check closed panels  */
+    ipcMain.on('closedPanel', (event ,arg) =>{
+        /*Change menu item dinamically. items[4] is to choose "View",
+        item[0] is to choose "Add Panel" and item[arg] is to choose the Panel*/
+        menu.items[4].submenu.items[0].submenu.
+                    items[arg].enabled = true;
+    })
+    
     // Create the browser window.
     win = new BrowserWindow({
         width: 800,
@@ -72,7 +83,7 @@ function createWindow() {
                 },
                 {
                     label: 'Quit',
-                    click(item, focusedWindow) {
+                    click() {
                         app.quit();
                     }
                 }
@@ -84,7 +95,7 @@ function createWindow() {
                 {
                     label: 'Video',
                     accelerator: 'Shift+V',
-                    click(item, focusedWindow) {
+                    click() {
                         dialog.showOpenDialog(
                             win,
                             {
@@ -99,7 +110,6 @@ function createWindow() {
 
                                 var videoFilePath = fileNames[0];
 
-                                var Helper = new helpers();
 
                                 Helper.getFramerate(videoFilePath, function (frameRate) {
                                     if (frameRate === null) {
@@ -118,7 +128,7 @@ function createWindow() {
                 {
                     label: 'Data File',
                     accelerator: 'Shift+D',
-                    click(item, focusedWindow) {
+                    click() {
                         dialog.showOpenDialog(
                             win,
                             {
@@ -159,7 +169,7 @@ function createWindow() {
                 {
                     label: 'Full Screenshot',
                     accelerator: screenshotCmd,
-                    click(item, focusedWindow) {
+                    click() {
                         win.webContents.send('capture', path.join(__dirname,'..'));
                         console.log("screen again");
                     }
@@ -170,6 +180,49 @@ function createWindow() {
         {
             label: 'View',
             submenu: [
+                {
+                    label: 'Add Panel',
+                    submenu: [
+                        {
+                            label: 'Visualizations',
+                            enabled:openedPanels[panelEnum.Vis],
+                            click (){
+                                win.webContents.send('newPanel', panelEnum.Vis);
+                                menu.items[4].submenu.items[0].submenu.
+                                    items[panelEnum.Vis].enabled = false;
+                            }
+                        },
+                        {
+                            label: 'Time Series',
+                            enabled:openedPanels[panelEnum.Time],
+                            click (){
+                                win.webContents.send('newPanel', panelEnum.Time);
+                                menu.items[4].submenu.items[0].submenu.
+                                    items[panelEnum.Time].enabled = false;
+                            }
+                        },
+                        {
+                            label: 'Video',
+                            enabled:openedPanels[panelEnum.Vid],
+                            click (){
+                                win.webContents.send('newPanel', panelEnum.Vid);
+                                //Change menu dinamically
+                                menu.items[4].submenu.items[0].submenu.
+                                    items[panelEnum.Vid].enabled = false;
+                            }
+                        },
+                        {
+                            label: '3D',
+                            enabled:openedPanels[panelEnum.XYZ],
+                            click (){
+                                win.webContents.send('newPanel', panelEnum.XYZ);
+                                menu.items[4].submenu.items[0].submenu.
+                                    items[panelEnum.XYZ].enabled = false;
+                            }
+                        },
+                        
+                    ]
+                },
                 {
                     label: 'Theme',
                     submenu: [
