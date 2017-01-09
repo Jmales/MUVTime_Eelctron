@@ -55,9 +55,14 @@ class LayoutService {
                     this.vidPanelHeight = component.container.height;
                     this.vidPanelWidth  = component.container.width;
 
-                    var video = document.getElementById("video1");
-                    video.height = this.vidPanelHeight - 90;
-                    video.width  = this.vidPanelWidth;
+                    try{
+                        var video = document.getElementById("video1");
+                        video.height = this.vidPanelHeight - 90;
+                        video.width  = this.vidPanelWidth;
+                    }
+                    catch(err){
+                        console.log(err);
+                    }
                     break;
                 case 3: //XYZ (3D) Panel
                     break;
