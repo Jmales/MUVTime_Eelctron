@@ -109,6 +109,7 @@ export default class GLComponent {
             
             content:[{
                 type: "column",
+                isClosable: false,
                 content: [{
                     type: "row",
                     height: 70,

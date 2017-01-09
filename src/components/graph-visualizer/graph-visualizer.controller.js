@@ -112,9 +112,13 @@ export default class graphCtrl {
                 var self2 = self;
 
                 /*TODO: See why worker tread is not working */
+                /* TODO: passar para service, controller ou helpers */
                 Papa.parse(data,{
                     fastMode: true,
                     //worker: true,
+                    error: function(error,file){
+                        console.log(error);
+                    },
                     complete:function(results){
                         console.log("Parsing complete of file ");
                         for (var row in results.data) {
