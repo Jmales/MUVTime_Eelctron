@@ -116,7 +116,7 @@ export default class graphCtrl {
                 Papa.parse(data,{
                     fastMode: true,
                     //worker: true,
-                    error: function(error,file){
+                    error: function(error){
                         console.log(error);
                     },
                     complete:function(results){

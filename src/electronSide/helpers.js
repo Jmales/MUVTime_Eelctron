@@ -36,6 +36,6 @@ module.exports = class HelperFunctions{
                 XYZ  :3
 
             };
-            this.openedPanels = [false,false,false,false];
+            this.closedPanels = [false,false,true,false];
     }
 };

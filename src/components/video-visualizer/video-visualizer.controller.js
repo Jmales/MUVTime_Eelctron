@@ -14,11 +14,11 @@
 
         /*Routine related with the initial values*/
         video.onloadstart = function () {
-            /*console.log("here_vid: ",LayoutService.vidPanelHeight,LayoutService.vidPanelWidth)
-            var parentHeight = document.getElementById("videoPanel").clientHeight;
-            var parentWidth = document.getElementById("videoPanel").clientWidth;
+            console.log("here_vid: ",LayoutService.vidPanelHeight,LayoutService.vidPanelWidth);
+            var parentHeight = document.getElementById("video1").clientHeight;
+            var parentWidth = document.getElementById("video1").clientWidth;
             video.height = parentHeight - 90;
-            video.width = parentWidth;*/
+            video.width = parentWidth;
            
         };
 

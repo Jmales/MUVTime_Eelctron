@@ -5,7 +5,6 @@ const ipcRenderer = require("electron").ipcRenderer;
 export default class GLComponent { 
     constructor($element,$http,$compile, $rootScope,$window,LayoutService){
 
-
         this.videoPathFile = LayoutService.videoPathFile;
         this._3dpanel = true;
 
@@ -114,8 +113,7 @@ export default class GLComponent {
                     type: "row",
                     height: 70,
                     content:[
-                        templateVisualizations,
-                        templateVideo
+                        templateVisualizations
                     ]
                 },{
                     type:"row",
@@ -158,7 +156,6 @@ export default class GLComponent {
 
                 container.on("destroy",() => {
                     ipcRenderer.send("closedPanel",container._config.id);
-                    console.log("What is happening");
                 });
             });  
 
