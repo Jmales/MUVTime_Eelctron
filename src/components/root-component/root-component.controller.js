@@ -3,7 +3,7 @@ import GoldenLayout from "golden-layout";
 const ipcRenderer = require("electron").ipcRenderer;
 
 export default class GLComponent { 
-    constructor($element,$http,$compile, $rootScope,$window,LayoutService){
+    constructor($element,$compile,$timeout, $rootScope,$window,LayoutService){
 
         this.videoPathFile = LayoutService.videoPathFile;
         this._3dpanel = true;
@@ -28,7 +28,15 @@ export default class GLComponent {
             LayoutService.isVideoOpened = true;
             LayoutService.setFrameRate(arg2);
             this.videoPathFile = arg1;
-            $rootScope.$apply();
+            console.log("in root");
+            console.log(document.getElementsByTagName("*"));
+            $timeout(function() {
+                /* Anything you want can go here and will safely be run on the next digest.
+                (http://stackoverflow.com/questions/12729122/angularjs-prevent-error-digest-already-in-progress-when-calling-scope-apply)
+                */
+                
+                $rootScope.$apply();
+            });
         }).bind(this);
        
         /*Connect with the main window to have the path of the selected Video file*/
@@ -156,6 +164,9 @@ export default class GLComponent {
 
                 container.on("destroy",() => {
                     ipcRenderer.send("closedPanel",container._config.id);
+                    
+                    //Destroy controller
+                    //$rootScope.$broadcast("destroyVid",1);
                 });
             });  
 

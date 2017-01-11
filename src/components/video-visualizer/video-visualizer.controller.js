@@ -1,10 +1,25 @@
 ﻿export default class videoCtrl {
-    constructor($scope, LayoutService) { 
+    constructor($scope,$timeout, LayoutService) { 
         this.stepValue = 100;
         this.selection = "ms";
         this.max = 10000;
         this.min = 1;
 
+        // $scope.$on("$destroy",function(){
+        //     console.log("Scope destroyed, as it should");
+        // });
+
+        // $scope.$on("destroyVid",function(event, id){
+        //     console.log("here "+ id);
+
+        //     /*Following 2 lines are necessary for angular digest cycle to complete */
+        //     $timeout(function(){
+        //         $scope.$destroy();
+        //     }); 
+        // });
+
+        console.log("In video controller");
+        console.log(document.getElementsByTagName("*"));
         
         var video = document.getElementById("video1");
         var videoplayRate = 1.0;
