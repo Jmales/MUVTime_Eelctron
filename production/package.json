@@ -1,0 +1,31 @@
+{
+  "name": "electron-app1",
+  "productName": "MuvTime",
+  "version": "1.0.0",
+  "description": "Electron-app1",
+  "main": "./electronSide/main.js",
+  "author": "joaopedro",
+  "scripts": {
+    "start": "electron ./electronSide/main.js",
+    "build": "electron-packager . MyApp --platform=win32",
+    "dev": "webpack",
+    "buildMac": "electron-packager . MyAppMac2 --platform=darwin",
+    "buildWin": "electron-packager . MyAppWin2 --platform=win32"
+  },
+  "dependencies": {
+    "angular": "^1.6.1",
+    "angular-nvd3": "^1.0.9",
+    "angular-ui-layout": "1.4.2",
+    "bootstrap": "^3.3.7",
+    "chart.js": "^2.4.0",
+    "d3": "^3.5.17",
+    "electron": "1.4.6",
+    "ffprobe": "^1.1.0",
+    "ffprobe-static": "^2.0.0",
+    "golden-layout": "^1.5.6",
+    "jquery": "^3.1.1",
+    "nvd3": "^1.8.5",
+    "papaparse": "^4.1.2"
+  },
+  "license": "ISC"
+}

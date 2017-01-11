@@ -1,0 +1,87 @@
+﻿.glyphicon-chevron-left,
+.glyphicon-chevron-right,
+.glyphicon-chevron-up,
+.glyphicon-chevron-down{
+  color: #aaa;
+}
+
+.ui-layout-column > .ui-splitbar > a,
+.ui-layout-row > .ui-splitbar > a {
+  font-size: 9px;
+}
+
+.panelTitle {
+    text-align: left;
+    font-size: 9px;
+    color: #484242;
+    background-color: #d6d8e0;
+    border: 1px solid #808080;
+    border-radius: 3px 3px 0px 0px;
+    padding:2px 4px 0px 4px;
+
+}
+
+.flex-container_title {
+    display: -webkit-flex;
+    display: flex;
+    height: 2.5vh;
+    justify-content:space-between;
+    margin-top: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+
+.glyphicon-remove {
+    font-size:9px;
+}
+
+
+
+.videoPlayer {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    background-color:#444141;
+}
+
+.line-break {
+  width: 100%;
+}
+
+
+.stepBox,
+.btn-default,
+.selectUnits
+{
+    font-size: 1.5vh;
+    text-align: center;
+    margin: 2px;
+    height: 4vh;
+}
+
+.flex-container_videoControl {
+    
+    display: flex;
+    flex-flow: row wrap;
+    align-content: center;
+    justify-content: center;
+    background-color: #444141;
+
+}
+
+input:invalid{
+	border:solid 2px #F5192F;
+}
+
+/*In order for Golden-layout has scrollbar*/
+/*body .lm_content{
+  overflow: scroll;
+}*/
+
+.graphs3{
+    height:100%;
+    width:100%;
+    position:absolute;
+}
