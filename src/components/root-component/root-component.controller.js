@@ -3,7 +3,7 @@ import GoldenLayout from "golden-layout";
 const ipcRenderer = require("electron").ipcRenderer;
 
 export default class GLComponent { 
-    constructor($element,$compile,$timeout, $rootScope,$window,LayoutService){
+    constructor($element,$compile,$scope,$timeout, $rootScope,$window,LayoutService){
 
         this.videoPathFile = LayoutService.videoPathFile;
         this._3dpanel = true;
@@ -126,8 +126,7 @@ export default class GLComponent {
                 },{
                     type:"row",
                     content: [
-                        templateTime,
-                        templateXyzVisualizer
+                        templateTime
                     ]
                     
                     }
@@ -142,12 +141,12 @@ export default class GLComponent {
                 var html;
                 if(state.extraInputs != null){
                     html = $compile("<"+ state.directive + " " 
-                                + state.extraInputs + "></"+state.directive + ">")($rootScope);
+                                + state.extraInputs + "></"+state.directive + ">")($scope);
                 
                 }
                 else{
                     html = $compile("<div><"+ state.directive 
-                                +"></"+state.directive +"></div>")($rootScope);
+                                +"></"+state.directive +"></div>")($scope);
                 }
                  
                 container.on("open",() => {

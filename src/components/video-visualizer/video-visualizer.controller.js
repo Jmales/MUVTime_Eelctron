@@ -18,24 +18,28 @@
         //     }); 
         // });
 
-        console.log("In video controller");
-        console.log(document.getElementsByTagName("*"));
-        
-        var video = document.getElementById("video1");
-        var videoplayRate = 1.0;
+        try{
+            var video = document.getElementById("video1");
+            var videoplayRate = 1.0;
 
 
-        //this.videoPathFile = LayoutService.videoPathFile;
+            //this.videoPathFile = LayoutService.videoPathFile;
 
-        /*Routine related with the initial values*/
-        video.onloadstart = function () {
+            /*Routine related with the initial values*/
+            video.onloadstart = function () {
             console.log("here_vid: ",LayoutService.vidPanelHeight,LayoutService.vidPanelWidth);
             var parentHeight = document.getElementById("video1").clientHeight;
             var parentWidth = document.getElementById("video1").clientWidth;
             video.height = parentHeight - 90;
             video.width = parentWidth;
            
-        };
+            };
+        }
+        catch(err){
+            console.log(err);
+            console.log("HTML still not available");
+        }
+        
 
         /*Listen for selectUnits change and modify the default value accordingly*/
         this.update_select = function() {

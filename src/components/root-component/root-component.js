@@ -1,7 +1,7 @@
 //const angular = require('angular');
 import angular from "angular";
 import controller from "./root-component.controller.js";
-
+import template from "./root-component.html";
 
 const Module = angular.module("app.components.root-component", [ ])
                       .controller("damn",controller)
@@ -9,7 +9,8 @@ const Module = angular.module("app.components.root-component", [ ])
                             
                           return{
                               restrict: "E",
-                              templateUrl: "components/root-component/root-component.html",
+                              //templateUrl: "rootComponentHtml.html",
+                              template: template,
                               controller: "damn",
                               controllerAs: "gl"
 

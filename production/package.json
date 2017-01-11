@@ -10,7 +10,7 @@
     "build": "electron-packager . MyApp --platform=win32",
     "dev": "webpack",
     "buildMac": "electron-packager . MyAppMac2 --platform=darwin",
-    "buildWin": "electron-packager . MyAppWin2 --platform=win32"
+    "buildWin": "electron-packager . MyAppWin2 --platform=win32 --out=../../StagingElectron"
   },
   "dependencies": {
     "angular": "^1.6.1",
